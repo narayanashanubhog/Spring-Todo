@@ -35,11 +35,11 @@ public void initBinder(WebDataBinder binder) {
 			dateFormat, false));
 }
 
-@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
+@RequestMapping(value = "/list-todo", method = RequestMethod.GET)
 public String showTodos(ModelMap model) {
 	String name = getLoggedInUserName(model);
 	model.put("todos", service.getAllTodo(name));
-	return "list-todos";
+	return "list-todo";
 }
 
 private String getLoggedInUserName(ModelMap model)
@@ -62,7 +62,7 @@ public String deleteTodo(@RequestParam int id) {
 		throw new RuntimeException("Something went wrong");
 	
 	service.deleteTodo(id);
-	return "redirect:/list-todos";
+	return "redirect:/list-todo";
 }
 
 @RequestMapping(value = "/update-todo", method = RequestMethod.GET)
@@ -84,7 +84,7 @@ public String updateTodo(ModelMap model, @Valid Todo todo,
 
 	service.updateTodo(todo);
 
-	return "redirect:/list-todos";
+	return "redirect:/list-todo";
 }
 
 
@@ -97,7 +97,7 @@ public String addTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
 
 	service.addTodo(getLoggedInUserName(model), todo.getDesc(), todo.getTargetDate(),
 			false);
-	return "redirect:/list-todos";
+	return "redirect:/list-todo";
 }
 
 }
